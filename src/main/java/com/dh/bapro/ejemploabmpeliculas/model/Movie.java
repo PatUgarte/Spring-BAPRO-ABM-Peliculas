@@ -5,32 +5,31 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-@Entity
-@Table(name="movies_db")
+@Entity(name="movies")
 public class Movie {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(unique=true, nullable=false)
+	@NotEmpty(message = "El titulo no puede ser vacio")
+	@Size(min=2, max=30, message = "Titulo debe de estar entre 2 y 30 letras")
+	@Column(nullable=false)
 	private String title;
 	@Column(nullable=false)
 	private Double rating;
-	private Integer releaseYear;
-	private String country;
+	@Column
+	private Integer awards;
 
-	public Movie() {
-		super();
-	}
+	public Movie() { }
 
-	public Movie(String title, Double rating, Integer releaseYear, String country) {
+	public Movie(String title, Double rating) {
 		super();
 		this.title = title;
 		this.rating = rating;
-		this.releaseYear = releaseYear;
-		this.country = country;
 	}
 
 	public Long getId() {
@@ -57,20 +56,11 @@ public class Movie {
 		this.rating = rating;
 	}
 
-	public Integer getReleaseYear() {
-		return releaseYear;
+	public Integer getAwards() {
+		return awards;
 	}
 
-	public void setReleaseYear(Integer releaseYear) {
-		this.releaseYear = releaseYear;
+	public void setAwards(Integer awards) {
+		this.awards = awards;
 	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
 }
