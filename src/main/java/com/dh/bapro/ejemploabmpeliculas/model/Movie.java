@@ -1,13 +1,10 @@
 package com.dh.bapro.ejemploabmpeliculas.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity(name="movies")
 public class Movie {
@@ -24,13 +21,19 @@ public class Movie {
 	@Column
 	private Integer awards;
 
-	public Movie() { }
+	@Column
+	private String poster;
 
-	public Movie(String title, Double rating) {
-		super();
-		this.title = title;
-		this.rating = rating;
-	}
+	@ManyToOne //pertenece a un genero
+	@JoinColumn(name = "genre_id")
+	private Genre genre;
+
+	//aqui cree la relacion para saber a que usuarios les gusta una pelicula, hago referencia a favouriteMovies que es el atributo de User
+	@ManyToMany(mappedBy = "favouriteMovies")
+	private List<User> users;
+
+
+	public Movie() { }
 
 	public Long getId() {
 		return id;
@@ -63,4 +66,29 @@ public class Movie {
 	public void setAwards(Integer awards) {
 		this.awards = awards;
 	}
+
+	public String getPoster() {
+		return poster;
+	}
+
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
+
+	public Genre getGenre() {
+		return genre;
+	}
+
+	public void setGenre(Genre genre) {
+		this.genre = genre;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
 }

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Estos son los pasos para implementar una relacion de muchos a muchos</h1>
+    <h2>Lo hare con pelicuas favoritas</h2>
+    <h3>Sirve para el Carrito, Seguidores.</h3>
+    <ol>
+        <li>Relacionar entre los modelos, dado que solo voy a guardar las dos llaves foraneas entonces relacion principal en User</li>
+        <li>Si necesito la relacion en movies la crea, sino lno la creo</li>
+        <li>Crear el boton pero con formulario por el method post que tenga: el id de la movie, el action debe ser:"/favorites/add/{movie_id}"</li>
+        <li>Crear el mapping por post en el FavouriteMovieController: "/favourites/add/{movie_id}"
+            <ol>
+                <li>Recibir en esa funcion el PathVariable y capturar ese movie_id</li>
+                <li>Buscar usando el repositorio con ese movie_id</li>
+                <li>Debo tener un usuario para agregarle esa pelicula favorita, para ello voy a usar cualquier id registrado en la base de datos (BD)</li>
+                <li>A ese usuario deberia de ejecutar el metodo que agrega la Movie al listado de favoritas.</li>
+                <li>Una vez agregado se guarda el usuario usando el repositorio</li>
+                <li>Verificaremos en BD  usando el workbench o el phpmyadmin</li>
+                <li>Una vez guardado vamos a redirigir al listado de productos de nuevo</li>
+            </ol>
+
+        </li>
+        <li>Vamos a hacer la pantalla del carrito de un usuario:
+            <ol>
+                <li>Crear GetMapping hacia la ruta "/favorites"</li>
+                <li>Debo tener un usuario para mostrar el listado de pelis favoritas, para ello voy a usar cualquier id registrado en la (BD)</li>
+                <li>Debo enviar usando el Model el los datos del listado de pelis favoritas</li>
+                <li>Voy a crear un html que muestre el listado de las pelis favoritas</li>
+                <li>recordemos usar el th:each el lo que quiero que se repita por pelicula.</li>
+            </ol>
+        </li>
+    </ol>
+</body>
+</html>

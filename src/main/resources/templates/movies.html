@@ -17,21 +17,34 @@
 <body>
 	<h1>Este es nuestro catálogo</h1>
 
+	<h2 th:if="${mensaje != null}" th:text="${mensaje}"></h2>
+
 	<table class="table">
 		<thead class="thead-dark">
 			<tr>
 				<th scope="col">Id</th>
+				<th scope="col">Poster</th>
 				<th scope="col">Título</th>
+				<th scope="col">Genero</th>
 				<th scope="col">Rating</th>
 				<th scope="col">Premios</th>
+				<th scope="col"> Acciones</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr th:each="unaPelicula : ${listaPeliculas}">
 				<th scope="row" th:text="${unaPelicula.id}"></th>
+				<th>
+					<img th:src="${unaPelicula.poster != null } ? @{${unaPelicula.poster}} : @{/posters/default.png}" width="50px"/></th>
 				<td th:text="${unaPelicula.title}"></td>
+				<td th:text="${(unaPelicula.genre != null ? unaPelicula.genre.name : 'No tiene' )}"></td>
 				<td th:text="${unaPelicula.rating}"></td>
 				<td th:text="${unaPelicula.awards}"></td>
+				<td>
+					<form th:action="@{'/favorites/add/' + ${unaPelicula.id}}" method="POST">
+						<button type="submit">Agregar favorita</button>
+					</form>
+				</td>
 			</tr>
 		</tbody>
 	</table>

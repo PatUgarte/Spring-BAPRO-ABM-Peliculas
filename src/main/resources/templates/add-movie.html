@@ -17,7 +17,7 @@
 <body>
 	<h1>Ingrese los datos de la película a agregar:</h1>
 
-	<form method="POST" th:action="@{/pelicula/add}" th:object="${movie}">
+	<form method="POST" th:action="@{/pelicula/add}" th:object="${movie}" enctype="multipart/form-data">
 	
 		<div class="form-row">
 			<div class="form-group col-md-6">
@@ -34,9 +34,21 @@
 			</div>
 		</div>
 		
-		<div class="form-group">
+		<div class="form-group col-md-6">
 			<label for="inputAwards">Premios</label>
 			<input type="number" step=1 class="form-control" id="inputAwards" placeholder="0" name="awards">
+		</div>
+
+		<div class="form-group col-md-6">
+			<label for="genre">Genero</label>
+			<select name="genre" id="genre">
+				<option th:each="genre : ${genres}" th:text="${genre.name}" th:value="${genre.id}" ></option>
+			</select>
+		</div>
+
+		<div class="form-group col-md-6">
+			<label for="inputPoster">Poster</label>
+			<input type="file" step=1 class="form-control" id="inputPoster" placeholder="0" name="posterUpload">
 		</div>
 
 		<button type="submit" class="btn btn-primary">Enviar</button>
